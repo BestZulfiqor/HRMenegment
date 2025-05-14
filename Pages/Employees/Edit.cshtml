@@ -1,0 +1,63 @@
+@page "{id:int}"
+@model HRManagement.Pages.Employees.EditModel
+
+<h1>Обновление сотрудника</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Employee.Id" />
+    
+    <div class="form-group">
+        <label asp-for="Employee.FirstName" class="control-label">Имя</label>
+        <input asp-for="Employee.FirstName" class="form-control" />
+        <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Employee.LastName" class="control-label">Фамилия</label>
+        <input asp-for="Employee.LastName" class="form-control" />
+        <span asp-validation-for="Employee.LastName" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Employee.Position" class="control-label">Должность</label>
+        <input asp-for="Employee.Position" class="form-control" />
+        <span asp-validation-for="Employee.Position" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Employee.Email" class="control-label"></label>
+        <input asp-for="Employee.Email" class="form-control" />
+        <span asp-validation-for="Employee.Email" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Employee.PhoneNumber" class="control-label">Телефон</label>
+        <input asp-for="Employee.PhoneNumber" class="form-control" />
+        <span asp-validation-for="Employee.PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Employee.Salary" class="control-label">Зарплата</label>
+        <input asp-for="Employee.Salary" class="form-control" />
+        <span asp-validation-for="Employee.Salary" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Employee.DepartmentId" class="control-label">Выбор отдела</label>
+        <select asp-for="Employee.DepartmentId" class="form-control" 
+                asp-items="@Model.Departments">
+            <option value="">-- Select Department --</option>
+        </select>
+        <span asp-validation-for="Employee.DepartmentId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input style="margin: 15px 0px;" type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-page="./Index">Назад к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

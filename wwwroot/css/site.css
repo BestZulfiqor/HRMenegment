@@ -1,0 +1,87 @@
+
+.departments-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1rem 0;
+}
+
+.departments-table thead th {
+  background-color: #f8f9fa;
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+}
+
+.departments-table tbody td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.departments-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-action-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0 4px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.btn-edit {
+  color: #fff;
+  background-color: #17a2b8;
+  border: 1px solid #17a2b8;
+}
+
+.btn-delete {
+  color: #fff;
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.btn-edit:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .departments-table thead {
+      display: none;
+  }
+  
+  .departments-table tbody td {
+      display: block;
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+  }
+  
+  .departments-table tbody td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 15px;
+      width: calc(50% - 15px);
+      padding-right: 10px;
+      font-weight: 600;
+      text-align: left;
+  }
+  
+  .departments-table tbody td .table-action-btn {
+      display: block;
+      margin: 5px 0;
+      text-align: center;
+  }
+}

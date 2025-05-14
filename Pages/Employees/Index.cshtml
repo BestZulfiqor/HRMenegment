@@ -1,0 +1,157 @@
+@page
+@model HRManagement.Pages.Employees.IndexModel
+
+@{
+    ViewData["Title"] = "Сотрудники";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>@ViewData["Title"]</h1>
+        <a asp-page="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Создать сотрудника
+        </a>
+    </div>
+
+    <form method="get" class="mb-3">
+        <div class="row g-2">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <select class="form-select" asp-for="Filters.FirstNameFilterType" style="max-width: 150px;">
+                        <option value="@FilterType.Equals">Равно</option>
+                        <option value="@FilterType.Contains">Содержит</option>
+                        <option value="@FilterType.NotEqual">Не равно</option>
+                    </select>
+                    <input type="text" asp-for="Filters.FirstName" class="form-control" placeholder="Имя"/>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="input-group">
+                    <select class="form-select" asp-for="Filters.LastNameFilterType" style="max-width: 150px;">
+                        <option value="@FilterType.Equals">Равно</option>
+                        <option value="@FilterType.Contains">Содержит</option>
+                        <option value="@FilterType.NotEqual">Не равно</option>
+                    </select>
+                    <input type="text" asp-for="Filters.LastName" class="form-control" placeholder="Фамилия"/>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="input-group">
+                    <select class="form-select" asp-for="Filters.PositionFilterType" style="max-width: 150px;">
+                        <option value="@FilterType.Equals">Равно</option>
+                        <option value="@FilterType.Contains">Содержит</option>
+                        <option value="@FilterType.NotEqual">Не равно</option>
+                    </select>
+                    <input type="text" asp-for="Filters.Position" class="form-control" placeholder="Должность"/>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <div class="input-group">
+                    <select class="form-select" asp-for="Filters.SalaryFilterType" style="max-width: 150px;">
+                        <option value="@FilterType.Equals">Равно</option>
+                        <option value="@FilterType.GreaterThan">Больше</option>
+                        <option value="@FilterType.GreaterThanOrEqual">Больше или равно</option>
+                        <option value="@FilterType.LessThan">Меньше</option>
+                        <option value="@FilterType.LessThanOrEqual">Меньше или равно</option>
+                        <option value="@FilterType.NotEqual">Не равно</option>
+                        <option value="@FilterType.Top10">Первые 10</option>
+                        <option value="@FilterType.AboveAverage">Выше среднего</option>
+                        <option value="@FilterType.BelowAverage">Ниже среднего</option>
+                    </select>
+                    <input type="number" step="0.01" asp-for="Filters.SalaryValue" class="form-control" placeholder="Зарплата"/>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <div class="input-group">
+                    <span class="input-group-text">Зарплата</span>
+                    <input type="number" step="0.01" asp-for="Filters.FromSalary" class="form-control" placeholder="От"/>
+                    <input type="number" step="0.01" asp-for="Filters.ToSalary" class="form-control" placeholder="До"/>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <div class="input-group">
+                    <select class="form-select" asp-for="Filters.HireDateFilterType" style="max-width: 150px;">
+                        <option value="@FilterType.Equals">Равно</option>
+                        <option value="@FilterType.GreaterThan">После</option>
+                        <option value="@FilterType.GreaterThanOrEqual">После или равно</option>
+                        <option value="@FilterType.LessThan">До</option>
+                        <option value="@FilterType.LessThanOrEqual">До или равно</option>
+                        <option value="@FilterType.NotEqual">Не равно</option>
+                    </select>
+                    <input type="date" asp-for="Filters.HireDateValue" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <select asp-for="Filters.DepartmentNames" class="form-control" multiple size="3">
+                    @foreach (var dep in Model.AllDepartments)
+                    {
+                        <option value="@dep">@dep</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4 mt-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary me-2">Применить</button>
+                <a asp-page="./Index" class="btn btn-secondary">Сбросить</a>
+            </div>
+        </div>
+    </form>
+
+    <div class="card shadow-sm mt-3">
+        <div class="card-body p-0">
+            <table class="table employees-table">
+                <thead class="thead-light">
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Должность</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Зарплата</th>
+                    <th>Дата найма</th>
+                    <th>Имя отдела</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Employees)
+                {
+                    <tr>
+                        <td data-label="Имя">@Html.DisplayFor(modelItem => item.FirstName)</td>
+                        <td data-label="Фамилия">@Html.DisplayFor(modelItem => item.LastName)</td>
+                        <td data-label="Должность">@Html.DisplayFor(modelItem => item.Position)</td>
+                        <td data-label="Email">@item.Email</td>
+                        <td data-label="Телефон">@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                        <td data-label="Зарплата">@Html.DisplayFor(modelItem => item.Salary)</td>
+                        <td data-label="Дата найма">@Html.DisplayFor(modelItem => item.HireDate)</td>
+                        <td data-label="Имя отдела">@Html.DisplayFor(modelItem => item.Department!.Name)</td>
+                        <td data-label="Действия">
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="table-action-btn btn-edit">
+                                <i class="fas fa-edit"></i> Обновить
+                            </a>
+                            <a asp-page="./Delete" asp-route-id="@item.Id" class="table-action-btn btn-delete">
+                                <i class="fas fa-trash-alt"></i> Удалить
+                            </a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.employees-table th').forEach((th, index) => {
+            document.querySelectorAll('.employees-table td:nth-child(' + (index + 1) + ')')
+                .forEach(td => td.setAttribute('data-label', th.innerText));
+        });
+    </script>
+}
