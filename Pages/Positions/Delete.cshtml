@@ -1,0 +1,45 @@
+﻿@page
+@model HRManagement.Pages.Positions.DeleteModel
+@{
+    ViewData["Title"] = "Delete Position";
+}
+
+<h1>Удаление должности</h1>
+
+<h3>Вы действидельно хотите удалить эту должность?</h3>
+<div>
+    <h4>Должность</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Имя
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Position.Title)
+        </dd>
+        <dt class="col-sm-2">
+            Описание
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Position.Description)
+        </dd>
+        <dt class="col-sm-2">
+            Мин. Зарплата
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Position.MinSalary)
+        </dd>
+        <dt class="col-sm-2">
+            Макс. Зарплата
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Position.MaxSalary)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Position.Id" />
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-page="./Index" class="btn btn-secondary">Назад к списку</a>
+    </form>
+</div>

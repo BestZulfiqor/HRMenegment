@@ -1,24 +1,39 @@
-@page "{id:int}"
+@page
 @model HRManagement.Pages.Employees.DeleteModel
+@{
+    ViewData["Title"] = "Delete Employee";
+}
 
 <h1>Удаление сотрудника</h1>
 
-<h3>Вы уверены что хотите удалить сотрудника!</h3>
+<h3>Вы действительно хотите удалить этого сотрудника?</h3>
 <div>
     <h4>Сотрудник</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            Имя
+            @Html.DisplayNameFor(model => model.Employee.FirstName)Имя
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Employee.FirstName)
+            @Html.DisplayFor(model => model.Employee.LastName)Фамилия
+        </dd>
+        <dt class="col-sm-2">
+            Должность
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Position!.Title)
+        </dd>
+        <dt class="col-sm-2">
+            Отдел
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Department!.Name)
         </dd>
     </dl>
     
     <form method="post">
         <input type="hidden" asp-for="Employee.Id" />
         <input type="submit" value="Удалить" class="btn btn-danger" /> |
-        <a asp-page="./Index">Назад к списку</a>
+        <a asp-page="./Index" class="btn btn-secondary">Назад к списку</a>
     </form>
 </div>

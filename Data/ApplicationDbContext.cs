@@ -11,6 +11,7 @@ namespace HRManagement.Data
         }
 
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Position> Positions { get; set; }
         public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -21,6 +22,12 @@ namespace HRManagement.Data
                 .HasOne(e => e.Department)
                 .WithMany(d => d.Employees)
                 .HasForeignKey(e => e.DepartmentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Employee>()
+                .HasOne(e => e.Position)
+                .WithMany(p => p.Employees)
+                .HasForeignKey(e => e.PositionId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

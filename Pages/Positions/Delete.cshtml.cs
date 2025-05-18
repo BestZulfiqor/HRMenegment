@@ -1,24 +1,21 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using HRManagement.Models;
 using HRManagement.Data;
 
-namespace HRManagement.Pages.Employees
+namespace HRManagement.Pages.Positions
 {
     public class DeleteModel(ApplicationDbContext context) : PageModel
     {
         [BindProperty]
-        public Employee Employee { get; set; } = default!;
+        public Position Position { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Employee = await context.Employees
-                .Include(e => e.Department)
-                .Include(e => e.Position)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Position = await context.Positions.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Employee == null)
+            if (Position == null)
             {
                 return NotFound();
             }
@@ -28,11 +25,11 @@ namespace HRManagement.Pages.Employees
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            Employee = await context.Employees.FindAsync(id);
+            Position = await context.Positions.FindAsync(id);
 
-            if (Employee != null)
+            if (Position != null)
             {
-                context.Employees.Remove(Employee);
+                context.Positions.Remove(Position);
                 await context.SaveChangesAsync();
             }
 

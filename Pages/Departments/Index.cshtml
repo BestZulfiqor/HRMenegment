@@ -11,8 +11,8 @@
         <a asp-page="Create" class="btn btn-primary">
             <i class="fas fa-plus"></i> Создать новый
         </a>
+        <a class="btn btn-primary" asp-page-handler="Export">Экспорт в Word</a>
     </div>
-
     <div class="card shadow-sm">
         <div class="card-body p-0">
             <table class="departments-table">
@@ -47,7 +47,6 @@
 
 @section Scripts {
     <script>
-        // Добавляем атрибуты data-label для мобильной версии
         document.querySelectorAll('.departments-table th').forEach((th, index) => {
             document.querySelectorAll('.departments-table td:nth-child(' + (index + 1) + ')')
                 .forEach(td => td.setAttribute('data-label', th.innerText));

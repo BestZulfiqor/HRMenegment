@@ -11,6 +11,9 @@
         <a asp-page="Create" class="btn btn-primary">
             <i class="fas fa-plus"></i> Создать сотрудника
         </a>
+        <a asp-page="./Index" asp-page-handler="Export" class="btn btn-success">
+            <i class="fas fa-file-word"></i> В Word
+        </a>
     </div>
 
     <form method="get" class="mb-3">
@@ -125,7 +128,7 @@
                     <tr>
                         <td data-label="Имя">@Html.DisplayFor(modelItem => item.FirstName)</td>
                         <td data-label="Фамилия">@Html.DisplayFor(modelItem => item.LastName)</td>
-                        <td data-label="Должность">@Html.DisplayFor(modelItem => item.Position)</td>
+                        <td data-label="Должность">@Html.DisplayFor(modelItem => item.Position!.Title)</td>
                         <td data-label="Email">@item.Email</td>
                         <td data-label="Телефон">@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
                         <td data-label="Зарплата">@Html.DisplayFor(modelItem => item.Salary)</td>

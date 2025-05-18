@@ -7,11 +7,11 @@ namespace HRManagement.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(255, ErrorMessage = "Длина должен быть между 3 и 255 символов", MinimumLength = 3)]
+        [StringLength(50, ErrorMessage = "Длина должен быть между 3 и 50 символов", MinimumLength = 3)]
         public string FirstName { get; set; } = string.Empty;
 
         [Required]
-        [StringLength(255, ErrorMessage = "Длина должен быть между 3 и 255 символов", MinimumLength = 3)]
+        [StringLength(50, ErrorMessage = "Длина должен быть между 3 и 50 символов", MinimumLength = 3)]
         public string LastName { get; set; } = string.Empty;
 
         [EmailAddress] public string? Email { get; set; }
@@ -21,9 +21,11 @@ namespace HRManagement.Models
 
         public DateTime HireDate { get; set; }
 
-        [Range(0, double.MaxValue)] public decimal Salary { get; set; }
+        [Range(500, double.MaxValue)] 
+        public decimal Salary { get; set; }
 
-        [MaxLength(50)] public string Position { get; set; }
+        public int PositionId { get; set; }
+        public Position? Position { get; set; }
 
         public int DepartmentId { get; set; }
         public Department? Department { get; set; }

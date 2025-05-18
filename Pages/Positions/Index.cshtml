@@ -1,0 +1,39 @@
+﻿@page
+@model HRManagement.Pages.Positions.IndexModel
+@{
+    ViewData["Title"] = "Positions";
+}
+
+<h1>Должности</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Создать новый</a>
+    <a asp-page="./Index" asp-page-handler="Export" class="btn btn-success">
+        <i class="fas fa-file-word"></i> Экспорт в Word
+    </a>
+</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Мин. Зарплата</th>
+        <th>Макс. Зарплата</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Positions)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.MinSalary)</td>
+            <td>@Html.DisplayFor(modelItem => item.MaxSalary)</td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="table-action-btn btn-edit">Обновить</a>
+                <a asp-page="./Delete" asp-route-id="@item.Id" class="table-action-btn btn-delete">Удалить</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
